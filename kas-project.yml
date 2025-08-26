@@ -1,0 +1,37 @@
+# kas-project.yml
+header:
+  version: 12
+
+repos:
+  poky:
+    url: https://git.yoctoproject.org/poky
+    refspec: scarthgap
+  meta-openembedded:
+    url: https://github.com/openembedded/meta-openembedded.git
+    refspec: scarthgap
+  meta-arm:
+    url: https://git.yoctoproject.org/meta-arm
+    refspec: scarthgap
+  meta-ti:
+    url: https://git.yoctoproject.org/meta-ti
+    refspec: scarthgap
+  meta-qt6:
+    url: https://github.com/YoeDistro/meta-qt6.git
+    refspec: 6.4  
+
+machine: beaglebone
+distro: poky
+target: core-image-minimal
+
+bblayers_conf_header:
+  base: |
+    BBLAYERS += "${TOPDIR}/../src/poky/meta"
+    BBLAYERS += "${TOPDIR}/../src/poky/meta-poky"
+    BBLAYERS += "${TOPDIR}/../src/poky/meta-yocoto-bsp"
+    BBLAYERS += "${TOPDIR}/../src/meta-openembedded/meta-oe"
+    BBLAYERS += "${TOPDIR}/../src/meta-openembedded/meta-python"
+    BBLAYERS += "${TOPDIR}/../src/meta-arm/meta-arm-toolchain"
+    BBLAYERS += "${TOPDIR}/../src/meta-arm/meta-arm"
+    BBLAYERS += "${TOPDIR}/../src/meta-ti/meta-ti-bsp"
+    BBLAYERS += "${TOPDIR}/../src/meta-qt6"
+    BBLAYERS += "${TOPDIR}/../layers/meta-bbb-app"
