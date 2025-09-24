@@ -6,18 +6,27 @@ repos:
   poky:
     url: https://git.yoctoproject.org/poky
     refspec: scarthgap
+    path: src/poky
+
   meta-openembedded:
     url: https://github.com/openembedded/meta-openembedded.git
     refspec: scarthgap
+    path: src/meta-openembedded
+
   meta-arm:
     url: https://git.yoctoproject.org/meta-arm
     refspec: scarthgap
+    path: src/meta-arm
+
   meta-ti:
     url: https://git.yoctoproject.org/meta-ti
     refspec: scarthgap
-  meta-qt6:
-    url: https://github.com/YoeDistro/meta-qt6.git
-    refspec: 6.4  
+    path: src/meta-ti
+
+  # meta-qt6:
+  #   url: https://github.com/YoeDistro/meta-qt6.git
+  #   refspec: 6.4  
+  #   path: src/meta-qt6
 
 machine: beaglebone
 distro: poky
@@ -27,11 +36,14 @@ bblayers_conf_header:
   base: |
     BBLAYERS += "${TOPDIR}/../src/poky/meta"
     BBLAYERS += "${TOPDIR}/../src/poky/meta-poky"
-    BBLAYERS += "${TOPDIR}/../src/poky/meta-yocoto-bsp"
+    BBLAYERS += "${TOPDIR}/../src/poky/meta-yocto-bsp"
     BBLAYERS += "${TOPDIR}/../src/meta-openembedded/meta-oe"
     BBLAYERS += "${TOPDIR}/../src/meta-openembedded/meta-python"
     BBLAYERS += "${TOPDIR}/../src/meta-arm/meta-arm-toolchain"
     BBLAYERS += "${TOPDIR}/../src/meta-arm/meta-arm"
     BBLAYERS += "${TOPDIR}/../src/meta-ti/meta-ti-bsp"
-    BBLAYERS += "${TOPDIR}/../src/meta-qt6"
-    BBLAYERS += "${TOPDIR}/../layers/meta-bbb-app"
+
+# BBLAYERS += "${TOPDIR}/../src/meta-qt6"
+# BBLAYERS += "${TOPDIR}/../layers/meta-bbb-app"
+
+
