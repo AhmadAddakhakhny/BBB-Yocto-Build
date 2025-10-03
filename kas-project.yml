@@ -32,6 +32,10 @@ machine: beaglebone
 distro: poky
 target: core-image-minimal
 
+local_conf_header:
+  bbb-image-features: |
+    IMAGE_FEATURES += "ssh-server-dropbear"
+
 bblayers_conf_header:
   base: |
     BBLAYERS += "${TOPDIR}/../src/poky/meta"
