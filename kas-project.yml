@@ -23,17 +23,17 @@ repos:
     refspec: scarthgap
     path: src/meta-ti
 
-  # meta-qt6:
-  #   url: https://github.com/YoeDistro/meta-qt6.git
-  #   refspec: 6.4  
-  #   path: src/meta-qt6
+  meta-qt6:
+    url: https://code.qt.io/yocto/meta-qt6.git
+    refspec: "lts-6.8"
+    path: src/meta-qt6
 
 machine: beaglebone
 distro: poky
 target: core-image-minimal
 
 local_conf_header:
-  bbb-image-features: |
+  bbb-config: |
     IMAGE_FEATURES += "ssh-server-dropbear"
 
 bblayers_conf_header:
@@ -46,8 +46,7 @@ bblayers_conf_header:
     BBLAYERS += "${TOPDIR}/../src/meta-arm/meta-arm-toolchain"
     BBLAYERS += "${TOPDIR}/../src/meta-arm/meta-arm"
     BBLAYERS += "${TOPDIR}/../src/meta-ti/meta-ti-bsp"
-    BBLAYERS += "${TOPDIR}/../layers/meta-bbb"
-
-# BBLAYERS += "${TOPDIR}/../src/meta-qt6"
+    BBLAYERS += "${TOPDIR}/../src/meta-qt6"
+# BBLAYERS += "${TOPDIR}/../layers/meta-bbb"
 
 
