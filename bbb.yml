@@ -45,6 +45,7 @@ bblayers_conf_header:
     BBLAYERS += "${TOPDIR}/../src/meta-arm/meta-arm-toolchain"
     BBLAYERS += "${TOPDIR}/../src/meta-arm/meta-arm"
     BBLAYERS += "${TOPDIR}/../src/meta-ti/meta-ti-bsp"
+    BBLAYERS += "${TOPDIR}/../src/meta-ti/meta-beagle"
     BBLAYERS += "${TOPDIR}/../src/meta-qt6"
 # BBLAYERS += "${TOPDIR}/../layers/meta-bbb"
 
