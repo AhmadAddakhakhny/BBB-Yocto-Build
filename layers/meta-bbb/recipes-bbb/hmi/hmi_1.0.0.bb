@@ -1,27 +1,27 @@
-SUMMART = "Recipe for HMI application on a Beaglebone Black"
+SUMMARY = "Recipe for HMI application on a Beaglebone Black"
 LICENSE = "CLOSED"
-SRC_URI = "git://github.com/AhmadAddakhakhny/BBB-Application.git;protocol=https;branch=main"
-# SRCREV = "Specify a SHA_1" or get latest
-SRCREV = "${AUTOREV}"
+SRC_URI = "file://hmi.sh \
+           file://hmi.service "
 
 # Compile time dependancies
-DEPENDS:append = " cmake qtbase qtdeclarative qtdeclarative-native "
+DEPENDS += " cmake qtbase qtdeclarative qtdeclarative-native "
 
 # Run time dependancies
-RDEPENDS:${PN}:append = " qtbase qtdeclarative "
+RDEPENDS:${PN} += " bash qtbase qtdeclarative "
 
-inherit qt6-cmake pkgconfig
+inherit systemd qt6-cmake pkgconfig
 
-EXTRA_OECMAKE:append = " --debug-find-pkg=Qt6Quick "
+S = "${WORKDIR}"
 
-S = "${WORKDIR}/git"
+SYSTEMD_AUTO_ENABLE = "enable"
+SYSTEMD_SERVICE:${PN} = "hmi.service"
 
-# do_compile() {
-#    export OECORE_TARGET_SYSROOT=${STAGING_DIR_TARGET}
+do_install() {
+    # install bash scrip under /usr/bin
+    install -d ${D}${bindir}
+    install -m 0755 ${S}/hmi.sh ${D}${bindir}/hmi.sh
 
-# }
-
-# do_install() {
-#     install -d ${D}${bindir}
-#     install -m 0755 ${S}/hmi ${D}${binddir}/hmi
-# }
+    # install service unit file under /lib/systemd/system
+    install -d ${D}${systemd_system_unitdir}
+    install -m 0644 ${S}/hmi.service  ${D}${systemd_system_unitdir}/hmi.service
+}

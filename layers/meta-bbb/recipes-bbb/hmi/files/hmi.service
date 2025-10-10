@@ -1,0 +1,8 @@
+[Unit]
+Description=Continuous Hello, HMI Service
+
+[Service]
+ExecStart=/bin/bash  /usr/bin/hmi.sh
+
+[Install]
+WantedBy=multi-user.target

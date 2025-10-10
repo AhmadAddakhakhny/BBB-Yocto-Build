@@ -27,13 +27,31 @@ repos:
     refspec: "lts-6.8"
     path: src/meta-qt6
 
+  # Custom application layer
+  meta-bbb:
+    path: layers/meta-bbb
+
 machine: beaglebone
 distro: poky
 target: core-image-minimal
 
 local_conf_header:
+  bbb-app: |
+    # Add your custom HMI application from meta-bbb to the rootfs
+    CORE_IMAGE_EXTRA_INSTALL += "hmi"
+
   bbb-config: |
+    # Enable SSH access via Dropbear
     IMAGE_FEATURES += "ssh-server-dropbear"
+
+  systemd: |
+    # Enable systemd as the init manager
+    DISTRO_FEATURES:append = " systemd"
+    VIRTUAL-RUNTIME_init_manager = "systemd"
+    DISTRO_FEATURES_BACKFILL_CONSIDERED += "sysvinit"
+    VIRTUAL-RUNTIME_initscripts = "systemd-compat-units"
+    VIRTUAL-RUNTIME_syslog = "systemd-journald"
+    VIRTUAL-RUNTIME_base-utils-syslog = ""
 
 bblayers_conf_header:
   base: |
@@ -47,6 +65,4 @@ bblayers_conf_header:
     BBLAYERS += "${TOPDIR}/../src/meta-ti/meta-ti-bsp"
     BBLAYERS += "${TOPDIR}/../src/meta-ti/meta-beagle"
     BBLAYERS += "${TOPDIR}/../src/meta-qt6"
-# BBLAYERS += "${TOPDIR}/../layers/meta-bbb"
-
-
+    BBLAYERS += "${TOPDIR}/../layers/meta-bbb"
