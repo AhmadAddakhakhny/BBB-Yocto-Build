@@ -32,7 +32,7 @@ repos:
     path: layers/meta-bbb
 
 machine: beaglebone
-distro: poky
+distro: bbb
 target: core-image-minimal
 
 local_conf_header:
@@ -43,15 +43,6 @@ local_conf_header:
   bbb-config: |
     # Enable SSH access via Dropbear
     IMAGE_FEATURES += "ssh-server-dropbear"
-
-  systemd: |
-    # Enable systemd as the init manager
-    DISTRO_FEATURES:append = " systemd"
-    VIRTUAL-RUNTIME_init_manager = "systemd"
-    DISTRO_FEATURES_BACKFILL_CONSIDERED += "sysvinit"
-    VIRTUAL-RUNTIME_initscripts = "systemd-compat-units"
-    VIRTUAL-RUNTIME_syslog = "systemd-journald"
-    VIRTUAL-RUNTIME_base-utils-syslog = ""
 
 bblayers_conf_header:
   base: |

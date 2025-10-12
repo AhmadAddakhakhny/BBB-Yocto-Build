@@ -4,12 +4,12 @@ SRC_URI = "file://hmi.sh \
            file://hmi.service "
 
 # Compile time dependancies
-DEPENDS += " cmake qtbase qtdeclarative qtdeclarative-native "
+DEPENDS += " "
 
 # Run time dependancies
-RDEPENDS:${PN} += " bash qtbase qtdeclarative "
+RDEPENDS:${PN} += " bash   "
 
-inherit systemd qt6-cmake pkgconfig
+inherit systemd
 
 S = "${WORKDIR}"
 
